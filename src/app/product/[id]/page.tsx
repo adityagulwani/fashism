@@ -1,4 +1,3 @@
-"use client";
 import { notFound } from 'next/navigation';
 import { getProductById } from '../../ProductGrid';
 import Link from 'next/link';
