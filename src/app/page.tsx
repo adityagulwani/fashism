@@ -1,3 +1,5 @@
+import ProductGrid from './ProductGrid';
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -19,30 +21,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Featured Collections</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Featured items will go here */}
-            <div className="bg-gray-100 rounded-lg p-6">
-              <div className="aspect-square bg-gray-200 rounded-lg mb-4"></div>
-              <h3 className="text-xl font-semibold mb-2">Collection 1</h3>
-              <p className="text-gray-600">Discover our latest trends</p>
-            </div>
-            <div className="bg-gray-100 rounded-lg p-6">
-              <div className="aspect-square bg-gray-200 rounded-lg mb-4"></div>
-              <h3 className="text-xl font-semibold mb-2">Collection 2</h3>
-              <p className="text-gray-600">Explore unique styles</p>
-            </div>
-            <div className="bg-gray-100 rounded-lg p-6">
-              <div className="aspect-square bg-gray-200 rounded-lg mb-4"></div>
-              <h3 className="text-xl font-semibold mb-2">Collection 3</h3>
-              <p className="text-gray-600">Find your perfect look</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Product Grid Section */}
+      <ProductGrid />
     </main>
   );
 }
