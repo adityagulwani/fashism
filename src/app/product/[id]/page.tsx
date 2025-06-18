@@ -1,7 +1,9 @@
+"use client";
 import { notFound } from 'next/navigation';
 import { getProductById } from '../../ProductGrid';
 import Link from 'next/link';
 import { useCart } from '../../CartContext';
+import Image from 'next/image';
 
 interface ProductPageProps {
   params: { id: string };
@@ -19,9 +21,11 @@ export default function ProductPage({ params }: ProductPageProps) {
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow p-8 flex flex-col md:flex-row gap-12">
         {/* Product Image */}
         <div className="flex-1 flex items-center justify-center">
-          <img
+          <Image
             src={product.image}
             alt={product.name}
+            width={400}
+            height={400}
             className="object-contain w-full max-w-xs h-auto rounded-lg bg-[#e0e0e0]"
           />
         </div>

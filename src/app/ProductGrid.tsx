@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useCart } from './CartContext';
+import Image from 'next/image';
 
 const products = [
   {
@@ -60,9 +61,11 @@ export default function ProductGrid() {
               {/* Product Image (clickable) */}
               <Link href={`/product/${product.id}`} className="w-full">
                 <div className="w-full aspect-[1/1] flex items-center justify-center bg-[#e0e0e0] rounded-md overflow-hidden cursor-pointer">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
+                    width={400}
+                    height={400}
                     className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-105"
                     style={{ maxHeight: 320 }}
                   />
