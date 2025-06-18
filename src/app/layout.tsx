@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,10 +24,10 @@ export default function RootLayout({
             <div className="flex items-center justify-between h-16">
               <div className="text-2xl font-bold">Fashism</div>
               <div className="hidden md:flex space-x-8">
-                <a href="/" className="hover:text-gray-600">Home</a>
-                <a href="/collections" className="hover:text-gray-600">Collections</a>
-                <a href="/about" className="hover:text-gray-600">About</a>
-                <a href="/contact" className="hover:text-gray-600">Contact</a>
+                <Link href="/" className="hover:text-gray-600">Home</Link>
+                <Link href="/collections" className="hover:text-gray-600">Collections</Link>
+                <Link href="/about" className="hover:text-gray-600">About</Link>
+                <Link href="/contact" className="hover:text-gray-600">Contact</Link>
               </div>
               <div className="flex items-center space-x-4">
                 <button className="p-2 hover:bg-gray-100 rounded-full">
@@ -60,10 +61,10 @@ export default function RootLayout({
               <div>
                 <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
                 <ul className="space-y-2">
-                  <li><a href="/" className="text-gray-400 hover:text-white">Home</a></li>
-                  <li><a href="/collections" className="text-gray-400 hover:text-white">Collections</a></li>
-                  <li><a href="/about" className="text-gray-400 hover:text-white">About</a></li>
-                  <li><a href="/contact" className="text-gray-400 hover:text-white">Contact</a></li>
+                  <li><Link href="/" className="text-gray-400 hover:text-white">Home</Link></li>
+                  <li><Link href="/collections" className="text-gray-400 hover:text-white">Collections</Link></li>
+                  <li><Link href="/about" className="text-gray-400 hover:text-white">About</Link></li>
+                  <li><Link href="/contact" className="text-gray-400 hover:text-white">Contact</Link></li>
                 </ul>
               </div>
               <div>
