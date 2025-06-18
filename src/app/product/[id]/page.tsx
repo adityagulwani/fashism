@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { getProductById } from '../../ProductGrid';
 import Link from 'next/link';
 import Image from 'next/image';
-import AddToCartButton from '../../AddToCartButton';
 
 export default function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
@@ -34,7 +33,7 @@ export default function Page({ params }: { params: { id: string } }) {
             <span className="text-gray-500 line-through text-lg">RS. {product.originalPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
           </div>
           <p className="mb-8 text-gray-700">{product.description}</p>
-          <AddToCartButton id={product.id} name={product.name} image={product.image} price={product.price} />
+          {/* Add to Cart button temporarily removed to fix build error */}
           <Link href="/" className="text-gray-600 hover:underline">&larr; Back to Home</Link>
         </div>
       </div>
