@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { useCart } from './CartContext';
+import Image from 'next/image';
 
 export default function CartSidebar() {
   const { cart, isSidebarOpen, toggleCartSidebar, removeFromCart } = useCart();
@@ -22,7 +23,7 @@ export default function CartSidebar() {
         ) : (
           cart.map((item) => (
             <div key={item.id} className="flex items-center gap-4 border-b pb-4">
-              <img src={item.image} alt={item.name} className="w-16 h-16 object-contain bg-gray-100 rounded" />
+              <Image src={item.image} alt={item.name} width={64} height={64} className="object-contain bg-gray-100 rounded" />
               <div className="flex-1">
                 <div className="font-semibold text-sm">{item.name}</div>
                 <div className="text-gray-600 text-xs">Qty: {item.quantity}</div>

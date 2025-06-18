@@ -5,11 +5,7 @@ import Link from 'next/link';
 import { useCart } from '../../CartContext';
 import Image from 'next/image';
 
-interface ProductPageProps {
-  params: { id: string };
-}
-
-export default function ProductPage({ params }: ProductPageProps) {
+export default function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   const product = getProductById(id);
   const { addToCart } = useCart();
