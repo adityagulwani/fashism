@@ -1,13 +1,12 @@
 import { notFound } from 'next/navigation';
 import { getProductById } from '../../ProductGrid';
 import Link from 'next/link';
-import { useCart } from '../../CartContext';
 import Image from 'next/image';
+import AddToCartButton from '../../AddToCartButton';
 
 export default function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   const product = getProductById(id);
-  const { addToCart } = useCart();
 
   if (!product) return notFound();
 
@@ -35,13 +34,7 @@ export default function Page({ params }: { params: { id: string } }) {
             <span className="text-gray-500 line-through text-lg">RS. {product.originalPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
           </div>
           <p className="mb-8 text-gray-700">{product.description}</p>
-          <button
-            className="bg-black text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors mb-4"
-            onClick={() => addToCart({ id: product.id, name: product.name, image: product.image, price: product.price })}
-            aria-label={`Add ${product.name} to cart`}
-          >
-            Add to Cart
-          </button>
+          <AddToCartButton id={product.id} name={product.name} image={product.image} price={product.price} />
           <Link href="/" className="text-gray-600 hover:underline">&larr; Back to Home</Link>
         </div>
       </div>
