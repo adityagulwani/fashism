@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+import { CartProvider, useCart } from './CartContext'
+import CartSidebar from './CartSidebar'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,6 +11,43 @@ export const metadata: Metadata = {
   title: "Fashism - Discover Your Style",
   description: "Welcome to Fashism - Your destination for fashion and style",
 };
+
+function Navbar() {
+  const { cart, toggleCartSidebar } = useCart();
+  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  return (
+    <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="text-2xl font-bold tracking-widest">Fashism</Link>
+          <div className="hidden md:flex space-x-6">
+            <Link href="/collections/tshirts" className="hover:text-gray-600">T-Shirts</Link>
+            <Link href="/collections/vests" className="hover:text-gray-600">Vests</Link>
+            <Link href="/collections/oversized" className="hover:text-gray-600">Oversized</Link>
+            <Link href="/collections/all" className="hover:text-gray-600">All</Link>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="hidden md:block">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="px-3 py-1 rounded bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
+              />
+            </div>
+            <button className="relative p-2 hover:bg-gray-100 rounded-full" onClick={toggleCartSidebar} aria-label="Open cart">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{itemCount}</span>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
 
 export default function RootLayout({
   children,
@@ -18,39 +57,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* Navigation */}
-        <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between h-16">
-              <div className="text-2xl font-bold">Fashism</div>
-              <div className="hidden md:flex space-x-8">
-                <Link href="/" className="hover:text-gray-600">Home</Link>
-                <Link href="/collections" className="hover:text-gray-600">Collections</Link>
-                <Link href="/about" className="hover:text-gray-600">About</Link>
-                <Link href="/contact" className="hover:text-gray-600">Contact</Link>
-              </div>
-              <div className="flex items-center space-x-4">
-                <button className="p-2 hover:bg-gray-100 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </button>
-                <button className="p-2 hover:bg-gray-100 rounded-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+        <CartProvider>
+          <Navbar />
+          <CartSidebar />
+          <div className="pt-16">
+            {children}
           </div>
-        </nav>
-
-        {/* Main Content */}
-        <div className="pt-16">
-          {children}
-        </div>
-
-        {/* Footer */}
+        </CartProvider>
         <footer className="bg-gray-900 text-white py-12">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

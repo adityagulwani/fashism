@@ -1,0 +1,51 @@
+import { notFound } from 'next/navigation';
+import { getProductById } from '../../ProductGrid';
+import Link from 'next/link';
+import { useCart } from '../../CartContext';
+
+interface ProductPageProps {
+  params: { id: string };
+}
+
+export default function ProductPage({ params }: ProductPageProps) {
+  const id = Number(params.id);
+  const product = getProductById(id);
+  const { addToCart } = useCart();
+
+  if (!product) return notFound();
+
+  return (
+    <div className="min-h-screen bg-[#c4c4c4] py-16">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow p-8 flex flex-col md:flex-row gap-12">
+        {/* Product Image */}
+        <div className="flex-1 flex items-center justify-center">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="object-contain w-full max-w-xs h-auto rounded-lg bg-[#e0e0e0]"
+          />
+        </div>
+        {/* Product Details */}
+        <div className="flex-1 flex flex-col justify-center">
+          <span className="inline-block mb-4 px-3 py-1 bg-black text-white text-xs font-bold tracking-widest">
+            SAVE {product.discount}%
+          </span>
+          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-2xl font-bold">RS. {product.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+            <span className="text-gray-500 line-through text-lg">RS. {product.originalPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+          </div>
+          <p className="mb-8 text-gray-700">{product.description}</p>
+          <button
+            className="bg-black text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors mb-4"
+            onClick={() => addToCart({ id: product.id, name: product.name, image: product.image, price: product.price })}
+            aria-label={`Add ${product.name} to cart`}
+          >
+            Add to Cart
+          </button>
+          <Link href="/" className="text-gray-600 hover:underline">&larr; Back to Home</Link>
+        </div>
+      </div>
+    </div>
+  );
+} 
